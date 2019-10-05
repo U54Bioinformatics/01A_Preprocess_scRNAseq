@@ -1,11 +1,29 @@
-  betsy_run.py --num_cores 20 --network_png count12.pdf --receipt count14.txt \
+# Preprocess 10x data.
+betsy_run.py --num_cores 20 --network_png count12.pdf --receipt count14.txt \
     --input TenXFastqFolder --input_file fastq01 \
     --input SampleGroupFile --input_file samp17.xls \
     --output TenXPreprocessing --output_file count11 \
     --mattr sample_names_are_10x_format=yes \
 
+# Preprocess iCell8 data.
+GTF=genomes/GENCODE.GRCh38.v29.annotation.gtf
+betsy_run.py --num_cores 30 \
+  --network_png proc02.pdf --receipt proc03.txt \
+  --input ICell8FastqFolder --input_file fastq21 \
+  --input ICell8WellListFile --input_file well81.txt \
+  --input ICell8SampleFile --input_file samp81.txt \
+  --input GTFGeneModel --input_file $GTF \
+  --input ReferenceGenome --input_file genomes/GENCODE.GRCh38.p12 \
+  --output ICell8Preprocessing --output_file proc01 \
+  --dattr ICell8Preprocessing.aligner=star \
+  --dattr ICell8Preprocessing.gene_expression_estimator=featurecounts \
+  --mattr num_reads_in_subset=50000 \
+  --mattr max_files_in_subset=20 \
+  --mattr use_shared_memory=yes
 
 
+
+# Do copy number analysis.
 betsy_run.py --network_png net.pdf --num_cores 20 \
   --input GenericCNVResults --input_file cnv \
   --input GenericCNVModelSelectionFile --input_file model.txt \
