@@ -23,6 +23,44 @@ betsy_run.py --num_cores 30 \
   --mattr use_shared_memory=yes
 
 
+# Preprocess for Fluidigm signal data.
+## Make a fluidigm sample file.
+ betsy_run.py \
+   --input FluidigmFastqFolder --input_file fastq01 \
+   --output UnvalidatedFluidigmSampleFile --output_file samp01.xls
+
+
+ GTF=genomes/Broad.hg19.RefSeq.NM_only.no_isoforms.170703.gtf
+ betsy_run.py --num_cores 40 --network_png fastq52.pdf \
+   --input FluidigmFastqFolder --input_file fastq01 \
+   --input FluidigmSampleFile --input_file samp01.xls \
+   --input GTFGeneModel --input_file $GTF \
+   --input ReferenceGenome --input_file genomes/Broad.hg19 \
+   --output FeatureCountsSummary --output_file fastq51.xls \
+   --dattr FeatureCountsSummary.aligner=star \
+   --mattr use_shared_memory=yes
+
+
+# Preprocess for Fluidigm signal reads (already demultiplexed).
+ GTF=genomes/gencode.vM14.annotation.gtf
+ betsy_run.py --num_cores 20 --network_png proc12.pdf --receipt proc13.txt \
+   --input FastqFolder --input_file fastq21 \
+   --input SampleGroupFile --input_file samp02.xls \
+   --input GTFGeneModel --input_file $GTF \
+   --input ReferenceGenome --input_file genomes/GENCODE.GRCm38 \
+   --output RNASeqSignalFile --output_file exp01.txt \
+   --dattr RNASeqSignalFile.preprocess=counts \
+   --dattr RNASeqSignalFile.aligner=star \
+   --dattr RNASeqSignalFile.gene_expression_estimator=featurecounts
+   
+## QC on the data with:
+ betsy_run.py --num_cores 20 --network_png meta02.pdf \
+   --input SignalFile --input_file count01.txt \
+   --dattr SignalFile.preprocess=counts \
+   --output scRNAMetadata --output_file meta01
+
+
+
 # Differential expression analysis.
 betsy_run.py --network_png test02.pdf --num_cores 20 \
   --input SignalFile --input_file exp01.txt \
