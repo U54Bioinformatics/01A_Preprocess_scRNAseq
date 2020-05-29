@@ -116,3 +116,23 @@ betsy_run.py --num_cores 20 --network_png test52.pdf \
   --output SingleRResults --output_file test51
 
 
+
+# InferCNV analysis
+
+GTF=genomes/Broad.hg19.RefSeq.NM_only.170811.gtf
+betsy_run.py --num_cores 20 --network_png cnva2.pdf --receipt cnva4.txt \
+  --input SignalFile --input_file exp31.txt \
+  --dattr SignalFile.preprocess=counts \
+  --input GTFGeneModel --input_file ${GTF} \
+  --output InferCNVAnalysis --output_file cnva1 \
+  --mattr reference_dataset=exp01.txt \
+  --mattr reference_dataset2=exp11.txt \
+  --mattr reference_name=fibroblasts \
+  --mattr reference_name2=hmec
+
+> *An Alternative\:*
+> *** --mattr infercnv_analysis=subclusters ***
+> *** --mattr infercnv_class_file=class_file.txt ***
+> *** --mattr infercnv_cutoff=1 ***
+> *** --mattr infercnv_merge_references=yes ***
+
