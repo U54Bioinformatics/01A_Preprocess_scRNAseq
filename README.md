@@ -131,6 +131,9 @@ betsy_run.py --num_cores 20 --network_png cnva2.pdf --receipt cnva4.txt \
   --mattr reference_name2=hmec
 
 > Other attributes\:
+> * --dattr InferCNVAnalysis.group_cells=yes
+> * --dattr InferCNVAnalysis.num_clusters=3
+> * --dattr InferCNVAnalysis.group_ref_cells=yes
 > * --mattr infercnv_analysis=subclusters
 > * --mattr infercnv_class_file=class_file.txt
 > * --mattr infercnv_cutoff=1
