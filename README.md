@@ -130,9 +130,9 @@ betsy_run.py --num_cores 20 --network_png cnva2.pdf --receipt cnva4.txt \
   --mattr reference_name=fibroblasts \
   --mattr reference_name2=hmec
 
-> *An Alternative\:*
-> *** --mattr infercnv_analysis=subclusters ***
-> *** --mattr infercnv_class_file=class_file.txt ***
-> *** --mattr infercnv_cutoff=1 ***
-> *** --mattr infercnv_merge_references=yes ***
+> * Other attributes\:
+> * --mattr infercnv_analysis=subclusters
+> * --mattr infercnv_class_file=class_file.txt
+> * --mattr infercnv_cutoff=1
+> * --mattr infercnv_merge_references=yes
 
