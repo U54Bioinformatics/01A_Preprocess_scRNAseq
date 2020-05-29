@@ -95,3 +95,24 @@ betsy_run.py --network_png clust12.pdf --num_cores 40 \\
    --mattr umap_snn_k=10 \\  
    --mattr umap_snn_resolution=0.8 \\  
    --mattr umap_umap_dimensions=10  
+
+
+
+# ImmClassifier analysis
+
+betsy_run.py --num_cores 20 --network_png imm02.pdf \
+  --input RNASeqSignalFile --input_file exp01.txt \
+  --dattr RNASeqSignalFile.preprocess=counts \
+  --output ImmClassifierResults --output_file imm01.txt
+
+Can work with counts, tpm, rma.
+
+
+# SingleR analysis
+
+betsy_run.py --num_cores 20 --network_png test52.pdf \
+  --input SignalFile --input_file test31.txt \
+  --dattr SignalFile.preprocess=counts \
+  --output SingleRResults --output_file test51
+
+
